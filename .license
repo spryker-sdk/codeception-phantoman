@@ -1,0 +1,12 @@
+/**
+ * Copyright © 2019-present Spryker Systems GmbH. All rights reserved.
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ *
+ * The Codeception extension for automatically starting and stopping PhantomJS
+ * when running tests.
+ *
+ * Originally based off of PhpBuiltinServer Codeception extension
+ * https://github.com/tiger-seo/PhpBuiltinServer
+ *
+ * https://github.com/grantlucas/phantoman
+ */

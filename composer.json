@@ -5,10 +5,11 @@
   "license": "proprietary",
   "require": {
     "php": ">=7.1",
-    "codeception/codeception": "^2.0.0 || ^3.0.0"
+    "codeception/codeception": "^2.0.0 || ^3.0.0 || ^4.0.0"
   },
   "require-dev": {
-    "sprxyker/code-sniffer": "*"
+    "phpstan/phpstan": "^0.12.4",
+    "spryker/code-sniffer": "*"
   },
   "autoload": {
     "psr-4": {
@@ -20,7 +21,7 @@
   "scripts": {
     "cs-check": "phpcs --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v src/ tests/ --ignore=/Fixtures,tests/_data/",
     "cs-fix": "phpcbf --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v src/ tests/ --ignorae=/Fixtures,tests/_data/",
-    "phpstan": "phpstan analyse -l 7 -c phpstan.neon src/"
+    "phpstan": "phpstan analyse -l 5 -c phpstan.neon src/"
   },
   "extra": {
     "branch-alias": {

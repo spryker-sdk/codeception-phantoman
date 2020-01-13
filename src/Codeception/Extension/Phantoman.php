@@ -134,7 +134,9 @@ class Phantoman extends Extension
                 throw new ExtensionException($this, 'PhantomJS server never became reachable.');
             }
 
+            // phpcs:disable
             $fp = @fsockopen('127.0.0.1', $this->config['port'], $errCode, $errStr, 10);
+            // phpcs:enable
             if ($fp) {
                 $this->writeln('');
                 $this->writeln('PhantomJS server now accessible.');

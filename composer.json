@@ -1,14 +1,15 @@
 {
   "name": "spryker-sdk/codeception-phantoman",
   "type": "library",
-  "description": "CodeceptionExtension module for auto start phantom.",
+  "description": "CodeceptionExtension for auto start phantom.",
   "license": "proprietary",
   "require": {
-    "php": ">=7.1",
-    "codeception/codeception": "^2.0.0 || ^3.0.0"
+    "php": ">=7.1"
   },
   "require-dev": {
-    "sprxyker/code-sniffer": "*"
+    "codeception/codeception": "^4.0",
+    "phpstan/phpstan": "^0.12.4",
+    "spryker/code-sniffer": "*"
   },
   "autoload": {
     "psr-4": {
@@ -18,9 +19,9 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "scripts": {
-    "cs-check": "phpcs --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v src/ tests/ --ignore=/Fixtures,tests/_data/",
-    "cs-fix": "phpcbf --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v src/ tests/ --ignorae=/Fixtures,tests/_data/",
-    "phpstan": "phpstan analyse -l 7 -c phpstan.neon src/"
+    "cs-check": "phpcs --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v src/",
+    "cs-fix": "phpcbf --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v src/",
+    "phpstan": "phpstan analyse -l 5 -c phpstan.neon src/"
   },
   "extra": {
     "branch-alias": {

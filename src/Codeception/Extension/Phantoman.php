@@ -3,13 +3,11 @@
 /**
  * Copyright © 2019-present Spryker Systems GmbH. All rights reserved.
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- *
  * The Codeception extension for automatically starting and stopping PhantomJS
  * when running tests.
- *
+
  * Originally based off of PhpBuiltinServer Codeception extension
  * https://github.com/tiger-seo/PhpBuiltinServer
- *
  * https://github.com/grantlucas/phantoman
  */
 
@@ -30,24 +28,18 @@ class Phantoman extends Extension
     ];
 
     /**
-     * A resource representing the PhantomJS process.
-     *
      * @var resource
      */
     private $resource;
 
     /**
-     * File pointers that correspond to PHP's end of any pipes that are created.
-     *
      * @var array
      */
     private $pipes;
 
     /**
      * @param array $config
-     *   Current extension configuration.
      * @param array $options
-     *   Passed running options.
      *
      * @throws \Codeception\Exception\ExtensionException
      */
@@ -89,22 +81,17 @@ class Phantoman extends Extension
         }
     }
 
-    /**
-     * Stop the server when we get destroyed.
-     */
     public function __destruct()
     {
         $this->stopServer();
     }
 
     /**
-     * Start PhantomJS server.
-     *
      * @throws \Codeception\Exception\ExtensionException
      *
      * @return void
      */
-    private function startServer()
+    private function startServer(): void
     {
         if ($this->resource !== null) {
             return;
@@ -147,7 +134,9 @@ class Phantoman extends Extension
                 throw new ExtensionException($this, 'PhantomJS server never became reachable.');
             }
 
+            // phpcs:disable
             $fp = @fsockopen('127.0.0.1', $this->config['port'], $errCode, $errStr, 10);
+            // phpcs:enable
             if ($fp) {
                 $this->writeln('');
                 $this->writeln('PhantomJS server now accessible.');
@@ -167,11 +156,9 @@ class Phantoman extends Extension
     }
 
     /**
-     * Stop PhantomJS server.
-     *
      * @return void
      */
-    private function stopServer()
+    private function stopServer(): void
     {
         if ($this->resource !== null) {
             $this->write('Stopping PhantomJS Server.');
@@ -216,12 +203,9 @@ class Phantoman extends Extension
     }
 
     /**
-     * Build the parameters for our command.
-     *
      * @return string
-     *   All parameters separated by spaces.
      */
-    private function getCommandParameters()
+    private function getCommandParameters(): string
     {
         // Map our config options to PhantomJS options.
         $mapping = [
@@ -263,12 +247,9 @@ class Phantoman extends Extension
     }
 
     /**
-     * Get PhantomJS command.
-     *
      * @return string
-     *   Command to execute.
      */
-    private function getCommand()
+    private function getCommand(): string
     {
         // Prefix command with exec on non Windows systems to ensure that we
         // receive the correct pid.
@@ -279,25 +260,19 @@ class Phantoman extends Extension
     }
 
     /**
-     * Checks if the current machine is Windows.
-     *
      * @return bool
-     *   True if the machine is windows.
      */
-    private function isWindows()
+    private function isWindows(): bool
     {
         return stripos(PHP_OS, 'WIN') === 0;
     }
 
     /**
-     * Suite Init.
-     *
      * @param \Codeception\Event\SuiteEvent $e
-     *   The event with suite, result and settings.
      *
      * @return void
      */
-    public function suiteInit(SuiteEvent $e)
+    public function suiteInit(SuiteEvent $e): void
     {
         // Check if PhantomJS should only be started for specific suites.
         if (isset($this->config['suites'])) {

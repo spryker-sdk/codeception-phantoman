@@ -1,0 +1,106 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  schedule:
+  - cron: "0 0 * * *"
+
+jobs:
+  validation:
+    runs-on: ubuntu-18.04
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: [
+            '7.2',
+            '7.3'
+        ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+            php-version: ${{ matrix.php-version }}
+            extensions: mbstring, intl, pdo_mysql
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+            echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Composer cache
+        uses: actions/cache@v2
+        with:
+            path: ${{ steps.composer-cache.outputs.dir }}
+            key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+            restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Composer require hirak/prestissimo
+        run: composer global require hirak/prestissimo
+
+      - name: Remove xdebug.ini
+        run: phpenv config-rm xdebug.ini
+
+      - name: Composer install
+        run: composer install --no-interaction --optimize-autoloader
+
+      - name: CodeStyle checks
+        run: composer cs-check
+
+      - name: PHPStan checks
+        run: composer stan
+
+  prefer-lowest:
+    runs-on: ubuntu-18.04
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: [
+            '7.1'
+        ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+            php-version: ${{ matrix.php-version }}
+            extensions: mbstring, intl, pdo_mysql
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+            echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Composer cache
+        uses: actions/cache@v2
+        with:
+            path: ${{ steps.composer-cache.outputs.dir }}
+            key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+            restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Remove xdebug.ini
+        run: phpenv config-rm xdebug.ini
+
+      - name: Composer require hirak/prestissimo
+        run: composer global require hirak/prestissimo
+
+      - name: Composer update prefer lowest
+        run: composer update --prefer-lowest --no-interaction --prefer-dist --prefer-stable --optimize-autoloader
+

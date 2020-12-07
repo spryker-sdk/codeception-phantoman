@@ -45,10 +45,7 @@ jobs:
             ${{ runner.os }}-composer-
 
       - name: Composer require hirak/prestissimo
-        run: composer global require hirak/prestissimo
-
-      - name: Remove xdebug.ini
-        run: phpenv config-rm xdebug.ini
+        run: composer require hirak/prestissimo
 
       - name: Composer install
         run: composer install --no-interaction --optimize-autoloader
@@ -96,11 +93,8 @@ jobs:
             restore-keys: |
             ${{ runner.os }}-composer-
 
-      - name: Remove xdebug.ini
-        run: phpenv config-rm xdebug.ini
-
       - name: Composer require hirak/prestissimo
-        run: composer global require hirak/prestissimo
+        run: composer require hirak/prestissimo
 
       - name: Composer update prefer lowest
         run: composer update --prefer-lowest --no-interaction --prefer-dist --prefer-stable --optimize-autoloader

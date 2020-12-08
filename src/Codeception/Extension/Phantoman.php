@@ -121,6 +121,7 @@ class Phantoman extends Extension
 
         if (!is_resource($this->resource) || !proc_get_status($this->resource)['running']) {
             proc_close($this->resource);
+
             throw new ExtensionException($this, 'Failed to start PhantomJS server.');
         }
 
@@ -141,6 +142,7 @@ class Phantoman extends Extension
                 $this->writeln('');
                 $this->writeln('PhantomJS server now accessible.');
                 fclose($fp);
+
                 break;
             }
 
@@ -172,6 +174,7 @@ class Phantoman extends Extension
                     $this->writeln('');
                     $this->writeln('Unable to properly shutdown PhantomJS server.');
                     unset($this->resource);
+
                     break;
                 }
 
@@ -180,6 +183,7 @@ class Phantoman extends Extension
                     $this->writeln('');
                     $this->writeln('PhantomJS server stopped.');
                     unset($this->resource);
+
                     break;
                 }
 
@@ -284,8 +288,10 @@ class Phantoman extends Extension
 
             // If the current suites aren't in the desired array, return without
             // starting PhantomJS.
-            if (!in_array($e->getSuite()->getBaseName(), $suites, true)
-                && !in_array($e->getSuite()->getName(), $suites, true)) {
+            if (
+                !in_array($e->getSuite()->getBaseName(), $suites, true)
+                && !in_array($e->getSuite()->getName(), $suites, true)
+            ) {
                 return;
             }
         }

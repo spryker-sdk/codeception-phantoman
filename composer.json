@@ -4,7 +4,7 @@
   "description": "CodeceptionExtension for auto start phantom.",
   "license": "proprietary",
   "require": {
-    "php": ">=7.2"
+    "php": ">=7.3"
   },
   "require-dev": {
     "codeception/codeception": "^4.0",

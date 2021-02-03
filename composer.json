@@ -9,7 +9,7 @@
   "require-dev": {
     "codeception/codeception": "^4.0",
     "phpstan/phpstan": "^0.12.4",
-    "spryker/code-sniffer": "*"
+    "spryker/code-sniffer": "dev-master"
   },
   "autoload": {
     "psr-4": {

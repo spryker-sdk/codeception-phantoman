@@ -1,36 +1,36 @@
 {
-  "name": "spryker-sdk/codeception-phantoman",
-  "type": "library",
-  "description": "CodeceptionExtension for auto start phantom.",
-  "license": "proprietary",
-  "require": {
-    "php": ">=7.2"
-  },
-  "require-dev": {
-    "codeception/codeception": "^4.0",
-    "phpstan/phpstan": "^0.12.4",
-    "spryker/code-sniffer": "dev-master"
-  },
-  "autoload": {
-    "psr-4": {
-      "Codeception\\Extension\\": "src/Codeception/Extension/"
+    "name": "spryker-sdk/codeception-phantoman",
+    "type": "library",
+    "description": "CodeceptionExtension for auto start phantom.",
+    "license": "proprietary",
+    "require": {
+        "php": ">=7.2"
+    },
+    "require-dev": {
+        "codeception/codeception": "^4.0",
+        "phpstan/phpstan": "^0.12.4",
+        "spryker/code-sniffer": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Codeception\\Extension\\": "src/Codeception/Extension/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "cs-check": "phpcs --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v src/",
+        "cs-fix": "phpcbf --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v src/",
+        "stan": "phpstan analyse -l 5 -c phpstan.neon src/"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    },
+    "config": {
+        "use-include-path": true,
+        "process-timeout": 600,
+        "sort-packages": true
     }
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "scripts": {
-    "cs-check": "phpcs --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v src/",
-    "cs-fix": "phpcbf --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v src/",
-    "stan": "phpstan analyse -l 5 -c phpstan.neon src/"
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "0.1.x-dev"
-    }
-  },
-  "config": {
-    "use-include-path": true,
-    "process-timeout": 600,
-    "sort-packages": true
-  }
 }
